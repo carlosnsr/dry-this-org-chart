@@ -34,10 +34,13 @@ tim.train('Protocols');
 employees.forEach(employee => {
     if (employee.name != 'Elon Musk') {
         employee.addManager(employees[0])
-        console.log(`${employee.name} is a ${employee.position} working on ${employee.project}`)
-        //changed "He" to "and".... chauvinist.
-        console.log(`and can be reached at ${employee.email}`
-        })
+    }
+})
+
+employees.forEach(employee => {
+    console.log(`${employee.name} is a ${employee.position} working on ${employee.project}`)
+    //changed "He" to "and".... chauvinist.
+    console.log(`and can be reached at ${employee.email}`)
 })
 // let elon = {
 //   name: "Elon Musk",
