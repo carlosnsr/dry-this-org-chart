@@ -27,23 +27,17 @@ let new_hires = [
   new Person("Donald Knuth", "donald.knuth@musky.com", "Mathematician", "Algorithm Analysis"),
 ]
 
-// assign each a manager
-let [alan, grace, donald] = new_hires
-alan.set_manager(elon)
-grace.set_manager(elon)
-donald.set_manager(elon)
+function on_board(employee, manager, course) {
+  employee.set_manager(manager)
+  employee.train(course)
+  employee.introduce()
+}
 
-// send to training
-alan.train("Mathematics")
-grace.train("Cobol")
-donald.train("Computational Complexity")
+let [alan, grace, donald] = new_hires
+on_board(alan, elon, "Mathematics")
+on_board(grace, elon, "Cobol")
+on_board(donald, elon, "Computational Complexity")
 
 // whoops!  new person hired later on, do the same again for him
 let tim = new Person("Tim Berners-Lee", "tim.berners_lee@musky.com", "Computer Scientist", "Networks" )
-tim.set_manager(elon)
-tim.train("Protocols")
-
-alan.introduce()
-grace.introduce()
-donald.introduce()
-tim.introduce()
+on_board(tim, elon, "Protocols")
