@@ -1,33 +1,12 @@
-function Person(name, email, position, pronoun) {
-  this.name = name
+function Person(name, email, skill, pronoun) {
   this.email = email
-  this.position = position
-  this.skills = []
-  this.project = 'nothing'
-  this.manager = {}
   this.managees = []
+  this.manager = {}
+  this.name = name
+  this.position = ''
+  this.project = ''
   this.pronoun = pronoun
-}
-
-Person.prototype.set_manager = function(manager) {
-  this.manager = manager
-  manager.add_managee(this)
-}
-
-Person.prototype.set_project = function(project) {
-  this.project = project
-}
-
-Person.prototype.add_skill = function(skill) {
-  let has_skill = false
-  this.skills.forEach(existing_skill => {
-    if (existing_skill = skill) {
-      has_skill = true
-    }
-  })
-  if (!has_skill) {
-    this.skills.push(skill)
-  }
+  this.skills = [skill]
 }
 
 Person.prototype.add_managee = function(person) {
@@ -42,34 +21,53 @@ Person.prototype.add_managee = function(person) {
   }
 }
 
+Person.prototype.add_skill = function(skill) {
+  let has_skill = false
+  this.skills.forEach(existing_skill => {
+    if (existing_skill = skill) {
+      has_skill = true
+    }
+  })
+  if (!has_skill) {
+    this.skills.push(skill)
+  }
+}
+
 Person.prototype.introduce = function() {
   console.log(`${this.name} is a ${this.position} working on ${this.project}.`)
   console.log(`${this.pronoun} can be reached at ${this.email}`)
 }
 
-var elon = new Person('Elon Musk', 'grace.musk@musky.com', 'Boss', 'He')
+Person.prototype.set_manager = function(manager) {
+  this.manager = manager
+  manager.add_managee(this)
+}
 
-var alan = new Person('Alan Turing', 'alan.turing@musky.com', 'Computer Scientist', 'He')
-alan.set_manager(elon)
-alan.add_skill('Mathematics')
-alan.set_project('Cryptography')
+Person.prototype.set_position = function(position) {
+  this.position = position
+}
 
-var grace = new Person('Grace Hopper', 'grace.hopper@musky.com', 'Computer Scientist', 'She')
-grace.set_manager(elon)
-grace.add_skill('Cobol')
-grace.set_project('Compilers')
+Person.prototype.set_project = function(project) {
+  this.project = project
+}
 
-var donald = new Person('Donald Knuth', 'donald.knuth@musky.com', 'Mathematician', 'He')
-donald.set_manager(elon)
-donald.add_skill('Computational Complexity')
-donald.set_project('Algorithm Analysis')
+Person.prototype.on_board = function(manager, position, project) {
+  this.set_manager(manager)
+  this.set_position(position)
+  this.set_project(project)
+  this.introduce()
+}
 
-var tim = new Person('Tim Berners-Lee', 'tim.berners_lee@musky.com', 'Computer Science', 'He')
-tim.set_manager(elon)
-tim.add_skill('Protocols')
-tim.set_project('Networks')
+var elon = new Person('Elon Musk', 'elon.musk@musky.com', 'Boss', 'He')
 
-alan.introduce()
-grace.introduce()
-donald.introduce()
-tim.introduce()
+var alan = new Person('Alan Turing', 'alan.turing@musky.com', 'Mathematics', 'He')
+alan.on_board(elon, 'Computer Scientist', 'Cryptography')
+
+var grace = new Person('Grace Hopper', 'grace.hopper@musky.com', 'Cobol', 'She')
+alan.on_board(elon, 'Computer Scientist', 'Compilers')
+
+var donald = new Person('Donald Knuth', 'donald.knuth@musky.com', 'Computational Complexity', 'He')
+donald.on_board(elon, 'Mathematician', 'Algorithm Analysis')
+
+var tim = new Person('Tim Berners-Lee', 'tim.berners_lee@musky.com', 'Protocols', 'He')
+tim.on_board(elon, 'Computer Scientist', 'Networks')
