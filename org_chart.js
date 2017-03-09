@@ -5,6 +5,10 @@ function Person(name, email, position, project = null) {
   this.project = project
 }
 
+Person.prototype.set_manager = function (manager) {
+  this.manager = manager
+}
+
 let elon = new Person("Elon Musk", "elon.musk@musky.com", "Boss")
 let new_hires = [
   new Person("Alan Turing", "alan.turing@musky.com", "Computer Scientist", "Cryptography"),
@@ -14,10 +18,9 @@ let new_hires = [
 
 // assign each a manager
 let [alan, grace, donald] = new_hires
-
-alan.manager = elon
-grace.manager = elon
-donald.manager = elon
+alan.set_manager(elon)
+grace.set_manager(elon)
+donald.set_manager(elon)
 
 // send to training
 if (!alan.skills) {
@@ -37,7 +40,7 @@ donald.skills.push("Computational Complexity")
 
 // whoops!  new person hired later on, do the same again for him
 let tim = new Person("Tim Berners-Lee", "tim.berners_lee@musky.com", "Computer Scientist", "Networks" )
-tim.manager = elon
+tim.set_manager(elon)
 
 if (!tim.skills) {
   tim.skills = []
