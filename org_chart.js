@@ -1,73 +1,55 @@
-let elon = {
-  name: "Elon Musk",
-  email: "elon.musk@musky.com",
-  position: "Boss",
+function Person(name, gender, email, skills) {
+  this.name = name;
+  this.gender = gender || "Not identified";
+  this.email = email || "none";
+  this.skills = (skills || []);
 }
 
-let new_hires = [
-  {
-    name: "Alan Turing",
-    email: "alan.turing@musky.com",
-    position: "Computer Scientist",
-    project: "Cryptography"
-  },
-  {
-    name: "Grace Hopper",
-    email: "grace.hopper@musky.com",
-    position: "Computer Scientist",
-    project: "Compilers"
-  },
-  {
-    name: "Donald Knuth",
-    email: "donald.knuth@musky.com",
-    position: "Mathematician",
-    project: "Algorithm Analysis"
+Person.prototype.hire = function (position, manager, project) {
+  this.position = (position || "TBD");
+  this.manager = (manager || "TBD");
+  this.project = (project || "no current projects");
+}
+
+Person.prototype.train = function (skill) {
+  this.skills.push(skill)
+}
+
+Person.prototype.describe = function () {
+  if (this.gender === "male") {
+    console.log(`${this.name} is a ${this.position} working on ${this.project}.`)
+    console.log(`He can be reached at ${this.email}.`)
   }
-]
-
-// assign each a manager
-let [alan, grace, donald] = new_hires
-
-alan.manager = elon
-grace.manager = elon
-donald.manager = elon
-
-// send to training
-if (!alan.skills) {
-  alan.skills = []
+  else if (this.gender === "female") {
+    console.log(`${this.name} is a ${this.position} working on ${this.project}.`)
+    console.log(`She can be reached at ${this.email}.`)
+  }
+  else {
+    console.log(`${this.name} is a ${this.position} working on ${this.project}.`)
+    console.log(`${this.name} can be reached at ${this.email}.`)
+  }
 }
-alan.skills.push("Mathematics")
 
-if (!grace.skills) {
-  grace.skills = []
-}
-grace.skills.push("Cobol")
+let elon = new Person("Elon Musk", "male", "elon.musk@musky.com");
+let alan = new Person("Alan Turing", "male", "alan.turing@musky.com");
+let grace = new Person("Grace Hopper", "female", "grace.hopper@musky.com");
+let donald = new Person("Donald Knuth", "male", "donald.knuth@musky.com")
 
-if (!donald.skills) {
-  donald.skills = []
-}
-donald.skills.push("Computational Complexity")
+elon.hire("Boss", "none");
+alan.hire("Computer Scientist", elon.name, "Cryptography");
+grace.hire("Computer Scientist", elon.name, "Compilers");
+donald.hire("Mathematician", elon.name, "Algorithm Analysis");
 
-// whoops!  new person hired later on, do the same again for him
-let new_hire = {
-  name: "Tim Berners-Lee",
-  email: "tim.berners_lee@musky.com",
-  position: "Computer Science",
-  project: "Networks"
-}
-let tim = new_hire
-tim.manager = elon
+alan.train("Mathematics");
+grace.train("Cobol");
+donald.train("Computational Complexity");
 
-if (!tim.skills) {
-  tim.skills = []
-}
-tim.skills.push("Protocols")
+let tim = new Person("Tim Berners-Lee", "male", "tim.berners_lee@musky.com");
+tim.hire("Computer Scientist", elon.name, "Networks");
+tim.train("Protocols");
 
-console.log(`${alan.name} is a ${alan.position} working on ${alan.project}.`)
-console.log(`He can be reached at ${alan.email}`)
-console.log(`${grace.name} is a ${grace.position} working on ${grace.project}.`)
-console.log(`She can be reached at ${grace.email}`)
-console.log(`${donald.name} is a ${donald.position} working on ${donald.project}.`)
-console.log(`He can be reached at ${donald.email}`)
-console.log(`${tim.name} is a ${tim.position} working on ${tim.project}.`)
-console.log(`He can be reached at ${tim.email}`)
+elon.describe();
+alan.describe();
+grace.describe();
+donald.describe();
+tim.describe();
