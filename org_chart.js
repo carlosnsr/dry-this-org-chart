@@ -1,67 +1,23 @@
-let elon = {
-  name: "Elon Musk",
-  email: "elon.musk@musky.com",
-  position: "Boss",
+function Boss(name, email, position){
+  this.name = name;
+  this.email = email;
+  this.position = "Boss";
 }
 
-let new_hires = [
-  {
-    name: "Alan Turing",
-    email: "alan.turing@musky.com",
-    position: "Computer Scientist",
-    project: "Cryptography"
-  },
-  {
-    name: "Grace Hopper",
-    email: "grace.hopper@musky.com",
-    position: "Computer Scientist",
-    project: "Compilers"
-  },
-  {
-    name: "Donald Knuth",
-    email: "donald.knuth@musky.com",
-    position: "Mathematician",
-    project: "Algorithm Analysis"
-  }
-]
-
-// assign each a manager
-let [alan, grace, donald] = new_hires
-
-alan.manager = elon
-grace.manager = elon
-donald.manager = elon
-
-// send to training
-if (!alan.skills) {
-  alan.skills = []
+function Hires(name, email, position, project, manager, skills){
+  this.name = name;
+  this.email = email;
+  this.position = position;
+  this.project = project;
+  this.manager = manager;
+  this.skills = skills;
 }
-alan.skills.push("Mathematics")
 
-if (!grace.skills) {
-  grace.skills = []
-}
-grace.skills.push("Cobol")
-
-if (!donald.skills) {
-  donald.skills = []
-}
-donald.skills.push("Computational Complexity")
-
-// whoops!  new person hired later on, do the same again for him
-let new_hire = {
-  name: "Tim Berners-Lee",
-  email: "tim.berners_lee@musky.com",
-  position: "Computer Science",
-  project: "Networks"
-}
-let tim = new_hire
-tim.manager = elon
-
-if (!tim.skills) {
-  tim.skills = []
-}
-tim.skills.push("Protocols")
+let elon = new Boss("elon", "elon.musk@musky.com")
+let alan = new Hires("Alan Turing", "Alan Turing", "Computer Scientist", "Cryptography", elon, "Mathematics")
+let grace = new Hires("Grace Hopper", "grace.hopper@musky.com", "Computer Scientist", "Compilers", elon, "Cobol")
+let donald = new Hires("Donald Knuth", "donald.knuth@musky.com", "Mathematician", "Algorithm Analysis", elon, "Computational Complexity")
+let tim = new Hires("Tim Berners-Lee", "tim.berners_lee@musky.com", "Computer Science", "Networks", elon, "Protocols")
 
 console.log(`${alan.name} is a ${alan.position} working on ${alan.project}.`)
 console.log(`He can be reached at ${alan.email}`)
