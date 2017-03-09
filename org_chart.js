@@ -4,58 +4,74 @@ let elon = {
   position: "Boss",
 }
 
-let new_hires = [
-  {
-    name: "Alan Turing",
-    email: "alan.turing@musky.com",
-    position: "Computer Scientist",
-    project: "Cryptography"
-  },
-  {
-    name: "Grace Hopper",
-    email: "grace.hopper@musky.com",
-    position: "Computer Scientist",
-    project: "Compilers"
-  },
-  {
-    name: "Donald Knuth",
-    email: "donald.knuth@musky.com",
-    position: "Mathematician",
-    project: "Algorithm Analysis"
-  }
-]
+
+function New_hire(name, email, position, project){
+  this.name = name;
+  this.email = email;
+  this.position = position;
+  this.projec = project;
+}
+
+let alan = new New_hire("Alan Turing", "grace.hopper@musky.com", "Computer Scientist", "Cryptography")
+let grace = new New_hire("Grace Hopper", "alan.turing@musky.com", "Computer Scientist", "Compilers")
+let donald = new New_hire("Donald Knuth",, "donald.knuth@musky.com", "Mathematician", "Algorithm Analysis")
+
+// let new_hires = [
+//   {
+//     name: "Alan Turing",
+//     email: "alan.turing@musky.com",
+//     position: "Computer Scientist",
+//     project: "Cryptography"
+//   },
+//   {
+//     name: "Grace Hopper",
+//     email: "grace.hopper@musky.com",
+//     position: "Computer Scientist",
+//     project: "Compilers"
+//   },
+//   {
+//     name: "Donald Knuth",
+//     email: "donald.knuth@musky.com",
+//     position: "Mathematician",
+//     project: "Algorithm Analysis"
+//   }
+// ]
 
 // assign each a manager
-let [alan, grace, donald] = new_hires
 
-alan.manager = elon
-grace.manager = elon
-donald.manager = elon
+new_hires.prototype.manger = elon
 
-// send to training
-if (!alan.skills) {
-  alan.skills = []
+// alan.manager = elon
+// grace.manager = elon
+// donald.manager = elon
+
+
+if (!new_hires.skills){
+  // send to training
+  if (!alan.skills) {
+    alan.skills = []
+  }
+  alan.skills.push("Mathematics")
+
+  if (!grace.skills) {
+    grace.skills = []
+  }
+  grace.skills.push("Cobol")
+
+  if (!donald.skills) {
+    donald.skills = []
+  }
+  donald.skills.push("Computational Complexity")
 }
-alan.skills.push("Mathematics")
-
-if (!grace.skills) {
-  grace.skills = []
-}
-grace.skills.push("Cobol")
-
-if (!donald.skills) {
-  donald.skills = []
-}
-donald.skills.push("Computational Complexity")
 
 // whoops!  new person hired later on, do the same again for him
-let new_hire = {
-  name: "Tim Berners-Lee",
-  email: "tim.berners_lee@musky.com",
-  position: "Computer Science",
-  project: "Networks"
-}
-let tim = new_hire
+// let new_hire = {
+//   name: "Tim Berners-Lee",
+//   email: "tim.berners_lee@musky.com",
+//   position: "Computer Science",
+//   project: "Networks"
+// }
+let tim = new New_hire("Tim Berners-Lee", "tim.berners_lee@musky.com", "Computer Science", "Networks")
 tim.manager = elon
 
 if (!tim.skills) {
