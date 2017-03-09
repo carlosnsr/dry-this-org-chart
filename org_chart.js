@@ -63,11 +63,13 @@ if (!tim.skills) {
 }
 tim.skills.push("Protocols")
 
-console.log(`${alan.name} is a ${alan.position} working on ${alan.project}.`)
-console.log(`He can be reached at ${alan.email}`)
-console.log(`${grace.name} is a ${grace.position} working on ${grace.project}.`)
-console.log(`She can be reached at ${grace.email}`)
-console.log(`${donald.name} is a ${donald.position} working on ${donald.project}.`)
-console.log(`He can be reached at ${donald.email}`)
-console.log(`${tim.name} is a ${tim.position} working on ${tim.project}.`)
-console.log(`He can be reached at ${tim.email}`)
+console.log(grace);
+
+// console.log(`${alan.name} is a ${alan.position} working on ${alan.project}.`)
+// console.log(`He can be reached at ${alan.email}`)
+// console.log(`${grace.name} is a ${grace.position} working on ${grace.project}.`)
+// console.log(`She can be reached at ${grace.email}`)
+// console.log(`${donald.name} is a ${donald.position} working on ${donald.project}.`)
+// console.log(`He can be reached at ${donald.email}`)
+// console.log(`${tim.name} is a ${tim.position} working on ${tim.project}.`)
+// console.log(`He can be reached at ${tim.email}`)
