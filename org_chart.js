@@ -1,16 +1,18 @@
 "use strict";
 
-function Employee(name, email, position, project){
+function Employee(name, email, position, gender, project){
   this.name = name;
   this.email = email;
   this.position = position;
-} if (!this.project) {
+  this.gender = gender;
+  if (!project) {
   this.project = "";
-} else {
+  } else {
   this.project = project;
+  }
 }
 
-Employee.prototype.skills = function(skills) {
+Employee.prototype.addSkill = function(skills) {
   if (!this.skills) {
     this.skills = [];
   } else {
@@ -18,31 +20,41 @@ Employee.prototype.skills = function(skills) {
   }
 }
 
-Employee.prototype.manager = function(manager) {//not working?
+Employee.prototype.setManager = function(manager) {//not working?
   this.manager = manager;
 }
 
 Employee.prototype.print = function(){ //working
   console.log(`${this.name} is a ${this.position} working on ${this.project}.`)
+  if (this.gender === "female") {
+      console.log(`She can be reached at ${this.email}`)
+  } else {
   console.log(`He can be reached at ${this.email}`)
+  }
 };
 
 
-let elon = new Employee("Elon Musk", "elon.musk@musky.com", "Boss");
-let alan = new Employee("Alan Turing","alan.turing@musky.com","Computer Scientist","Cryptography");
-let grace = new Employee("Grace Hopper","grace.hopper@musky.com","Computer Scientist","Compilers");
-let donald = new Employee("Donald Knuth","donald.knuth@musky.com","Mathematician","Algorithm Analysis");
-let tim = new Employee("Tim Berners-Lee","tim.berners_lee@musky.com","Computer Science","Networks");
+let elon = new Employee("Elon Musk","elon.musk@musky.com","male","Boss");
+let alan = new Employee("Alan Turing","alan.turing@musky.com","Computer Scientist","male", "Cryptography");
+let grace = new Employee("Grace Hopper","grace.hopper@musky.com","Computer Scientist","female","Compilers");
+let donald = new Employee("Donald Knuth","donald.knuth@musky.com","Mathematician","male","Algorithm Analysis");
+let tim = new Employee("Tim Berners-Lee","tim.berners_lee@musky.com","Computer Science","male","Networks");
 
 console.log("elon", elon);
 elon.print();
-elon.manager("nobody");
+elon.setManager("nobody");
 console.log("elon", elon);
 
-donald.manager("Elon Musk");
-alan.manager("Elon Musk");
-alan.manager("Elon Musk");
+grace.print();
 
+donald.setManager("Elon Musk");
+alan.setManager("Elon Musk");
+alan.setManager("Elon Musk");
+
+alan.addSkill("Mathematics");
+grace.addSkill("Cobol");
+donald.addSkill("Computational Complexity");
+tim.addSkill("Protocols");
 
 
 // let elon = {
