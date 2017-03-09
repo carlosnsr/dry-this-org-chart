@@ -12,20 +12,12 @@ Person.prototype.addManager = function(man) {
 }
 
 Person.prototype.checkTraining = function(skill) {
-  (this.skills).filter(function(x) {
-    if (x !== skill) {
+  if (this.skills.indexOf(skill) > -1) {
+    console.log(this.name, " doesn't need training.");
+  }
+  else {
     this.skills.push(skill)
-  } else {
-  console.log(this.name, " doesn't need training.");
-    }
-  })
-  // Refactored
-  // if (this.skills.indexOf(skill) > -1) {
-  //   console.log(this.name, " doesn't need training.");
-  // }
-  // else {
-  //   this.skills.push(skill)
-  // }
+  }
 }
 
 Person.prototype.print = function() {
