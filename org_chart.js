@@ -1,67 +1,53 @@
-let elon = {
-  name: "Elon Musk",
-  email: "elon.musk@musky.com",
-  position: "Boss",
+function Person(name, email, position) {
+  this.name = name
+  this.email = email
+  this.position = position
+  this.skills = []
+  this.project = 'nothing'
+  this.manager = {}
 }
 
-let new_hires = [
-  {
-    name: "Alan Turing",
-    email: "alan.turing@musky.com",
-    position: "Computer Scientist",
-    project: "Cryptography"
-  },
-  {
-    name: "Grace Hopper",
-    email: "grace.hopper@musky.com",
-    position: "Computer Scientist",
-    project: "Compilers"
-  },
-  {
-    name: "Donald Knuth",
-    email: "donald.knuth@musky.com",
-    position: "Mathematician",
-    project: "Algorithm Analysis"
+Person.prototype.set_manager = function(manager) {
+  this.manager = manager
+}
+
+Person.prototype.set_project = function(project) {
+  this.project = project
+}
+
+Person.prototype.add_skill = function(skill) {
+  let has_skill = false
+  this.skills.forEach(existing_skill => {
+    if (existing_skill = skill) {
+      has_skill = true
+    }
+  })
+  if (!has_skill) {
+    this.skills.push(skill)
   }
-]
-
-// assign each a manager
-let [alan, grace, donald] = new_hires
-
-alan.manager = elon
-grace.manager = elon
-donald.manager = elon
-
-// send to training
-if (!alan.skills) {
-  alan.skills = []
 }
-alan.skills.push("Mathematics")
 
-if (!grace.skills) {
-  grace.skills = []
-}
-grace.skills.push("Cobol")
+var elon = new Person('Elon Musk', 'grace.musk@musky.com', 'Boss')
 
-if (!donald.skills) {
-  donald.skills = []
-}
-donald.skills.push("Computational Complexity")
+var alan = new Person('Alan Turing', 'alan.turing@musky.com', 'Computer Scientist')
+alan.set_manager(elon)
+alan.add_skill('Mathematics')
+alan.set_project('Cryptography')
 
-// whoops!  new person hired later on, do the same again for him
-let new_hire = {
-  name: "Tim Berners-Lee",
-  email: "tim.berners_lee@musky.com",
-  position: "Computer Science",
-  project: "Networks"
-}
-let tim = new_hire
-tim.manager = elon
+var grace = new Person('Grace Hopper', 'grace.hopper@musky.com', 'Computer Scientist')
+grace.set_manager(elon)
+grace.add_skill('Cobol')
+grace.set_project('Compilers')
 
-if (!tim.skills) {
-  tim.skills = []
-}
-tim.skills.push("Protocols")
+var donald = new Person('Donald Knuth', 'donald.knuth@musky.com', 'Mathematician')
+donald.set_manager(elon)
+donald.add_skill('Computational Complexity')
+donald.set_project('Algorithm Analysis')
+
+var tim = new Person('Tim Berners-Lee', 'tim.berners_lee@musky.com', 'Computer Science')
+tim.set_manager(elon)
+tim.add_skill('Protocols')
+tim.set_project('Networks')
 
 console.log(`${alan.name} is a ${alan.position} working on ${alan.project}.`)
 console.log(`He can be reached at ${alan.email}`)
