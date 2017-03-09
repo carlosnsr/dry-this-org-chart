@@ -1,73 +1,52 @@
-let elon = {
-  name: "Elon Musk",
-  email: "elon.musk@musky.com",
-  position: "Boss",
+function Person(name, email, position, project, sex) {
+  this.name = name;
+  this.email = email;
+  this.position = position;
+  this.skills = [];
+  this.project = project;
+  this.sex = sex;
 }
 
-let new_hires = [
-  {
-    name: "Alan Turing",
-    email: "alan.turing@musky.com",
-    position: "Computer Scientist",
-    project: "Cryptography"
-  },
-  {
-    name: "Grace Hopper",
-    email: "grace.hopper@musky.com",
-    position: "Computer Scientist",
-    project: "Compilers"
-  },
-  {
-    name: "Donald Knuth",
-    email: "donald.knuth@musky.com",
-    position: "Mathematician",
-    project: "Algorithm Analysis"
+Person.prototype.addManager = function(man) {
+  this.manager = man;
+}
+
+Person.prototype.checkTraining = function(skill) {
+  if (this.skills.indexOf(skill) > -1) {
+    console.log(this.name, " doesn't need training.");
   }
-]
-
-// assign each a manager
-let [alan, grace, donald] = new_hires
-
-alan.manager = elon
-grace.manager = elon
-donald.manager = elon
-
-// send to training
-if (!alan.skills) {
-  alan.skills = []
+  else {
+    this.skills.push(skill)
+  }
 }
-alan.skills.push("Mathematics")
 
-if (!grace.skills) {
-  grace.skills = []
+Person.prototype.print = function() {
+  var herm;
+  console.log(this.name, " is a ", this.position, " working on ", this.project, ".");
+  if(this.sex == "Male") {
+    herm = "He";
+  } else {
+    herm = "She";
+  }
+  console.log(herm, " can be reached at ", this.email);
 }
-grace.skills.push("Cobol")
 
-if (!donald.skills) {
-  donald.skills = []
+Person.prototype.completePerson = function(man, skill) {
+  this.addManager(man);
+  this.checkTraining(skill);
+  this.print();
 }
-donald.skills.push("Computational Complexity")
+
+let elon = new Person ("Elon Musk", "elon.musk@musky.com", "Boss", "none", "Male");
+let alan = new Person ("Alan Turing","alan.turing@musky.com","Computer Scientist","Cryptography", "Male");
+let grace = new Person ("Grace Hopper", "grace.hopper@musky.com", "Computer Scientist", "Compilers", "Female");
+let donald = new Person ("Donald Knuth", "donald.knuth@musky.com","Mathematician", "Algorithm Analysis", "Male");
+
+alan.completePerson("Elon", "Mathematics");
+grace.completePerson("Elon", "Cobol");
+donald.completePerson("Elon", "Computational Complexity");
 
 // whoops!  new person hired later on, do the same again for him
-let new_hire = {
-  name: "Tim Berners-Lee",
-  email: "tim.berners_lee@musky.com",
-  position: "Computer Science",
-  project: "Networks"
-}
-let tim = new_hire
-tim.manager = elon
+let tim = new Person ("Tim Berners-Lee","tim.berners_lee@musky.com","Computer Science","Networks", "Male");
 
-if (!tim.skills) {
-  tim.skills = []
-}
-tim.skills.push("Protocols")
-
-console.log(`${alan.name} is a ${alan.position} working on ${alan.project}.`)
-console.log(`He can be reached at ${alan.email}`)
-console.log(`${grace.name} is a ${grace.position} working on ${grace.project}.`)
-console.log(`She can be reached at ${grace.email}`)
-console.log(`${donald.name} is a ${donald.position} working on ${donald.project}.`)
-console.log(`He can be reached at ${donald.email}`)
-console.log(`${tim.name} is a ${tim.position} working on ${tim.project}.`)
-console.log(`He can be reached at ${tim.email}`)
+tim.completePerson("Elon", "Protocols");
