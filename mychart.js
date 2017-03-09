@@ -12,30 +12,12 @@ let alan = new Employee("Alan Turing", "He", "alan.turing@musky.com", "Computer 
 let grace = new Employee("Grace Hopper", "She", "grace.hopper@musky.com", "Computer Scientist", "Compilers", elon)
 let donald = new Employee("Donald Knuth", "He" ,"donald.knuth@musky.com", "Mathematician", "Algorithm Analysis", elon)
 
-
-Employee.prototype.training = function(name) {
-  if (!this.skills) {
-     this.skills = []
-  }
-  if (this.name === "Donald Knuth") {
-    this.skills.push("Computational Complexity")
-  }
-  if (this.name === "Alan Turing") {
-    this.skills.push("Mathematics")
-  }
-  if (this.name === "Grace Hopper") {
-    this.skills.push("Cobol")
-  }
-  if (this.name === "Tim Berners-Lee") {
-    this.skills.push("Protocols")
-  }
-}
-alan.training()
-grace.training()
-donald.training()
+alan.skills = ["Mathematics"]
+grace.skills = ["Cobol"]
+donald.skills = ["Computational Complexity"]
 
 let tim = new Employee("Tim Berners-Lee", "He", "tim.berners_lee@musky.com", "Computer Science", "Networks", elon)
-tim.training()
+tim.skills = ["Protocols"]
 
 var employees = [alan, grace, donald, tim]
 
@@ -46,4 +28,4 @@ var Dalog = function(array) {
     console.log(`${element.gender} can be reached at ${element.email}`)
   }
 }
- Dalog(employees)
+ Dalog(employees);
