@@ -1,28 +1,15 @@
-let elon = {
-  name: "Elon Musk",
-  email: "elon.musk@musky.com",
-  position: "Boss",
+function Person(name, email, position, project = null) {
+  this.name = name
+  this.email = email
+  this.position = position
+  this.project = project
 }
 
+let elon = new Person("Elon Musk", "elon.musk@musky.com", "Boss")
 let new_hires = [
-  {
-    name: "Alan Turing",
-    email: "alan.turing@musky.com",
-    position: "Computer Scientist",
-    project: "Cryptography"
-  },
-  {
-    name: "Grace Hopper",
-    email: "grace.hopper@musky.com",
-    position: "Computer Scientist",
-    project: "Compilers"
-  },
-  {
-    name: "Donald Knuth",
-    email: "donald.knuth@musky.com",
-    position: "Mathematician",
-    project: "Algorithm Analysis"
-  }
+  new Person("Alan Turing", "alan.turing@musky.com", "Computer Scientist", "Cryptography"),
+  new Person("Grace Hopper", "grace.hopper@musky.com", "Computer Scientist", "Compilers"),
+  new Person("Donald Knuth", "donald.knuth@musky.com", "Mathematician", "Algorithm Analysis"),
 ]
 
 // assign each a manager
@@ -49,13 +36,7 @@ if (!donald.skills) {
 donald.skills.push("Computational Complexity")
 
 // whoops!  new person hired later on, do the same again for him
-let new_hire = {
-  name: "Tim Berners-Lee",
-  email: "tim.berners_lee@musky.com",
-  position: "Computer Science",
-  project: "Networks"
-}
-let tim = new_hire
+let tim = new Person("Tim Berners-Lee", "tim.berners_lee@musky.com", "Computer Scientist", "Networks" )
 tim.manager = elon
 
 if (!tim.skills) {
