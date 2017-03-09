@@ -16,18 +16,19 @@ Person.prototype.train = function (skill) {
 }
 
 Person.prototype.describe = function () {
-  if (this.gender === "male") {
-    console.log(`${this.name} is a ${this.position} working on ${this.project}.`)
-    console.log(`He can be reached at ${this.email}.`)
+  let salutation;
+  switch(this.gender) {
+    case "male":
+        salutation = "He";
+        break;
+    case "female":
+        salutation = "She";
+        break;
+    default:
+        salutation = this.name;
   }
-  else if (this.gender === "female") {
-    console.log(`${this.name} is a ${this.position} working on ${this.project}.`)
-    console.log(`She can be reached at ${this.email}.`)
-  }
-  else {
-    console.log(`${this.name} is a ${this.position} working on ${this.project}.`)
-    console.log(`${this.name} can be reached at ${this.email}.`)
-  }
+  console.log(`${this.name} is a ${this.position} working on ${this.project}.`)
+  console.log(`${salutation} can be reached at ${this.email}.`)
 }
 
 let elon = new Person("Elon Musk", "male", "elon.musk@musky.com");
@@ -45,7 +46,9 @@ grace.train("Cobol");
 donald.train("Computational Complexity");
 
 let tim = new Person("Tim Berners-Lee", "male", "tim.berners_lee@musky.com");
+
 tim.hire("Computer Scientist", elon.name, "Networks");
+
 tim.train("Protocols");
 
 elon.describe();
