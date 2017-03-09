@@ -1,8 +1,9 @@
-function Person(name, email, position, project = null) {
+function Person(name, email, position, project = null, gender = "M") {
   this.name = name
   this.email = email
   this.position = position
   this.project = project
+  this.gender = gender
   this.skills = []
 }
 
@@ -16,13 +17,13 @@ Person.prototype.train = function (skill) {
 
 Person.prototype.introduce = function () {
   console.log(`${this.name} is a ${this.position} working on ${this.project}.`)
-  console.log(`He can be reached at ${this.email}`)
+  console.log(`${this.gender === "F" ? 'She' : 'He' } can be reached at ${this.email}`)
 }
 
 let elon = new Person("Elon Musk", "elon.musk@musky.com", "Boss")
 let new_hires = [
   new Person("Alan Turing", "alan.turing@musky.com", "Computer Scientist", "Cryptography"),
-  new Person("Grace Hopper", "grace.hopper@musky.com", "Computer Scientist", "Compilers"),
+  new Person("Grace Hopper", "grace.hopper@musky.com", "Computer Scientist", "Compilers", "F"),
   new Person("Donald Knuth", "donald.knuth@musky.com", "Mathematician", "Algorithm Analysis"),
 ]
 
