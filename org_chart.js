@@ -1,14 +1,17 @@
-function Person(name, email, position) {
+function Person(name, email, position, pronoun) {
   this.name = name
   this.email = email
   this.position = position
   this.skills = []
   this.project = 'nothing'
   this.manager = {}
+  this.managees = []
+  this.pronoun = pronoun
 }
 
 Person.prototype.set_manager = function(manager) {
   this.manager = manager
+  manager.add_managee(this)
 }
 
 Person.prototype.set_project = function(project) {
@@ -27,33 +30,46 @@ Person.prototype.add_skill = function(skill) {
   }
 }
 
-var elon = new Person('Elon Musk', 'grace.musk@musky.com', 'Boss')
+Person.prototype.add_managee = function(person) {
+  let already_managing = false
+  this.managees.forEach(managee => {
+    if (managee === person) {
+      already_managing = true
+    }
+  })
+  if (!already_managing) {
+    this.managees.push(person)
+  }
+}
 
-var alan = new Person('Alan Turing', 'alan.turing@musky.com', 'Computer Scientist')
+Person.prototype.introduce = function() {
+  console.log(`${this.name} is a ${this.position} working on ${this.project}.`)
+  console.log(`${this.pronoun} can be reached at ${this.email}`)
+}
+
+var elon = new Person('Elon Musk', 'grace.musk@musky.com', 'Boss', 'He')
+
+var alan = new Person('Alan Turing', 'alan.turing@musky.com', 'Computer Scientist', 'He')
 alan.set_manager(elon)
 alan.add_skill('Mathematics')
 alan.set_project('Cryptography')
 
-var grace = new Person('Grace Hopper', 'grace.hopper@musky.com', 'Computer Scientist')
+var grace = new Person('Grace Hopper', 'grace.hopper@musky.com', 'Computer Scientist', 'She')
 grace.set_manager(elon)
 grace.add_skill('Cobol')
 grace.set_project('Compilers')
 
-var donald = new Person('Donald Knuth', 'donald.knuth@musky.com', 'Mathematician')
+var donald = new Person('Donald Knuth', 'donald.knuth@musky.com', 'Mathematician', 'He')
 donald.set_manager(elon)
 donald.add_skill('Computational Complexity')
 donald.set_project('Algorithm Analysis')
 
-var tim = new Person('Tim Berners-Lee', 'tim.berners_lee@musky.com', 'Computer Science')
+var tim = new Person('Tim Berners-Lee', 'tim.berners_lee@musky.com', 'Computer Science', 'He')
 tim.set_manager(elon)
 tim.add_skill('Protocols')
 tim.set_project('Networks')
 
-console.log(`${alan.name} is a ${alan.position} working on ${alan.project}.`)
-console.log(`He can be reached at ${alan.email}`)
-console.log(`${grace.name} is a ${grace.position} working on ${grace.project}.`)
-console.log(`She can be reached at ${grace.email}`)
-console.log(`${donald.name} is a ${donald.position} working on ${donald.project}.`)
-console.log(`He can be reached at ${donald.email}`)
-console.log(`${tim.name} is a ${tim.position} working on ${tim.project}.`)
-console.log(`He can be reached at ${tim.email}`)
+alan.introduce()
+grace.introduce()
+donald.introduce()
+tim.introduce()
