@@ -1,34 +1,43 @@
-let employees = [];
-
-function Hire(name, position, project) {
+//CONSTRUCTOR AND PROTOTYPE////////////////
+function Hire(name, position, project, directory, username = name.replace(' ', '.').replace('-', '_').toLowerCase()) {
     this.name = name;
-    this.email = name.replace(' ', '.').replace('-', '_').toLowerCase() + '@musky.com';
+    this.email = username + '@musky.com';
     this.position = position;
-    this.manager = {
-        name: "Elon Musk",
-        email: "elon.musk@musky.com",
-        position: "Boss"
-    }
     this.project = project;
     this.skills = [];
-    employees.push(this);
+    directory.push(this);
 }
 Hire.prototype.train = function(skill) {
     this.skills.push(skill);
 }
-let alan = new Hire('Alan Turing', 'Computer Scientist', 'Cryptography'),
-    grace = new Hire('Grace Hopper', 'Computer Scientist', 'Compilers'),
-    donald = new Hire('Donald Knuth', 'Mathematician', 'Algorithm Analysis'),
-    tim = new Hire('Tim Berners-Lee', 'Computer Science', 'Networks')
+Hire.prototype.addManager = function(employee_object) {
+    this.manager = employee_object;
+}
+////////////////////////////////////////////
 
-    alan.train('Mathematics');
-    grace.train('Cobol');
-    donald.train('Computational Complexity');
-    tim.train('Protocols');
+//Instance Specific/////////////////////////
+let employees = [],
+    elon = new Hire('Elon Musk', 'Boss', '', employees),
+    alan = new Hire('Alan Turing', 'Computer Scientist', 'Cryptography', employees),
+    grace = new Hire('Grace Hopper', 'Computer Scientist', 'Compilers', employees),
+    donald = new Hire('Donald Knuth', 'Mathematician', 'Algorithm Analysis', employees),
+    tim = new Hire('Tim Berners-Lee', 'Computer Science', 'Networks', employees)
+
+alan.train('Mathematics');
+grace.train('Cobol');
+donald.train('Computational Complexity');
+tim.train('Protocols');
+
+
+
 
 employees.forEach(employee => {
-  console.log(`${employee.name} is a ${employee.position} working on ${employee.project}.`)
-  console.log(`He can be reached at ${employee.email}`)
+    if (employee.name != 'Elon Musk') {
+        employee.addManager(employees[0])
+        console.log(`${employee.name} is a ${employee.position} working on ${employee.project}`)
+        //changed "He" to "and".... chauvinist.
+        console.log(`and can be reached at ${employee.email}`
+        })
 })
 // let elon = {
 //   name: "Elon Musk",
