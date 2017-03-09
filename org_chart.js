@@ -3,10 +3,15 @@ function Person(name, email, position, project = null) {
   this.email = email
   this.position = position
   this.project = project
+  this.skills = []
 }
 
 Person.prototype.set_manager = function (manager) {
   this.manager = manager
+}
+
+Person.prototype.train = function (skill) {
+  this.skills.push(skill)
 }
 
 let elon = new Person("Elon Musk", "elon.musk@musky.com", "Boss")
@@ -23,29 +28,14 @@ grace.set_manager(elon)
 donald.set_manager(elon)
 
 // send to training
-if (!alan.skills) {
-  alan.skills = []
-}
-alan.skills.push("Mathematics")
-
-if (!grace.skills) {
-  grace.skills = []
-}
-grace.skills.push("Cobol")
-
-if (!donald.skills) {
-  donald.skills = []
-}
-donald.skills.push("Computational Complexity")
+alan.train("Mathematics")
+grace.train("Cobol")
+donald.train("Computational Complexity")
 
 // whoops!  new person hired later on, do the same again for him
 let tim = new Person("Tim Berners-Lee", "tim.berners_lee@musky.com", "Computer Scientist", "Networks" )
 tim.set_manager(elon)
-
-if (!tim.skills) {
-  tim.skills = []
-}
-tim.skills.push("Protocols")
+tim.train("Protocols")
 
 console.log(`${alan.name} is a ${alan.position} working on ${alan.project}.`)
 console.log(`He can be reached at ${alan.email}`)
