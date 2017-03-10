@@ -28,15 +28,6 @@ Person.prototype.greeting = function() {
 let [alan, grace, donald] = new_hires
 
 
-
-
-// whoops!  new person hired later on, do the same again for him
-let new_hire =  new Person(){
-  name: "Tim Berners-Lee",
-  email: "tim.berners_lee@musky.com",
-  position: "Computer Science",
-  project: "Networks"
-}
 let tim = new_hire
 tim.manager = elon
 
