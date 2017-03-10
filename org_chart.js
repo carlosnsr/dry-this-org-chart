@@ -1,73 +1,59 @@
-let elon = {
-  name: "Elon Musk",
-  email: "elon.musk@musky.com",
-  position: "Boss",
+function Person(name, email, position, gender) {
+  this.name = name;
+  this.email = email;
+  this.position = position;
+  this.gender = gender;
 }
 
-let new_hires = [
-  {
-    name: "Alan Turing",
-    email: "alan.turing@musky.com",
-    position: "Computer Scientist",
-    project: "Cryptography"
-  },
-  {
-    name: "Grace Hopper",
-    email: "grace.hopper@musky.com",
-    position: "Computer Scientist",
-    project: "Compilers"
-  },
-  {
-    name: "Donald Knuth",
-    email: "donald.knuth@musky.com",
-    position: "Mathematician",
-    project: "Algorithm Analysis"
+let elon = new Person("Elon Musk", "elon.musk@musky.com", "Boss")
+
+Person.prototype.employee = function(project, manager) {
+  this.project = project;
+  this.manager = manager;
+}
+
+let alan = new Person("Alan Turing", "alan.turing@musky.com", "Computer Scientist", "He")
+let grace = new Person("Grace Hopper", "grace.hopper@musky.com", "Computer Scientist", "She")
+let donald = new Person("Donald Knuth", "donald.knuth@musky.com", "Mathematician", "He")
+
+alan.employee("Cryptography", elon.name)
+grace.employee("Compilers", elon.name)
+donald.employee("Algorithm Analysis", elon.name)
+
+Person.prototype.training = function(name) {
+  if (!this.skills) {
+     this.skills = []
   }
-]
-
-// assign each a manager
-let [alan, grace, donald] = new_hires
-
-alan.manager = elon
-grace.manager = elon
-donald.manager = elon
-
-// send to training
-if (!alan.skills) {
-  alan.skills = []
+  if (this.name === "Donald Knuth") {
+    this.skills.push("Computational Complexity")
+  }
+  if (this.name === "Alan Turing") {
+    this.skills.push("Mathematics")
+  }
+  if (this.name === "Grace Hopper") {
+    this.skills.push("Cobol")
+  }
+  if (this.name === "Tim Berners-Lee") {
+    this.skills.push("Protocols")
+  }
 }
-alan.skills.push("Mathematics")
 
-if (!grace.skills) {
-  grace.skills = []
+alan.training()
+grace.training()
+donald.training()
+
+let tim = new Person("Tim Berners-Lee", "tim.berners_lee@musky.com", "Computer Science", "He")
+tim.employee("Networks", elon.name)
+tim.training()
+
+var employees = [alan, grace, donald, tim]
+
+var showDetail = function(array) {
+  for (let i = 0; i < array.length; i++) {
+    let element = array[i];
+    console.log(`${element.name} is a ${element.position} working on ${element.project}.`)
+    console.log(`${element.gender} can be reached at ${element.email}`)
+  }
 }
-grace.skills.push("Cobol")
 
-if (!donald.skills) {
-  donald.skills = []
-}
-donald.skills.push("Computational Complexity")
-
-// whoops!  new person hired later on, do the same again for him
-let new_hire = {
-  name: "Tim Berners-Lee",
-  email: "tim.berners_lee@musky.com",
-  position: "Computer Science",
-  project: "Networks"
-}
-let tim = new_hire
-tim.manager = elon
-
-if (!tim.skills) {
-  tim.skills = []
-}
-tim.skills.push("Protocols")
-
-console.log(`${alan.name} is a ${alan.position} working on ${alan.project}.`)
-console.log(`He can be reached at ${alan.email}`)
-console.log(`${grace.name} is a ${grace.position} working on ${grace.project}.`)
-console.log(`She can be reached at ${grace.email}`)
-console.log(`${donald.name} is a ${donald.position} working on ${donald.project}.`)
-console.log(`He can be reached at ${donald.email}`)
-console.log(`${tim.name} is a ${tim.position} working on ${tim.project}.`)
-console.log(`He can be reached at ${tim.email}`)
+showDetail(employees)
