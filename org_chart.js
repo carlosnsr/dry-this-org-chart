@@ -1,60 +1,33 @@
-let elon = {
-  name: "Elon Musk",
-  email: "elon.musk@musky.com",
-  position: "Boss",
+
+//Person constructor
+function Person(name, email, position, project, pronoun) {
+  this.name = name;
+  this.email = email;
+  this.position = position;
+  this.project = project;
+  this.skills = [];
+  this.pronoun = pronoun;
 }
 
-let new_hires = [
-  {
-    name: "Alan Turing",
-    email: "alan.turing@musky.com",
-    position: "Computer Scientist",
-    project: "Cryptography"
-  },
-  {
-    name: "Grace Hopper",
-    email: "grace.hopper@musky.com",
-    position: "Computer Scientist",
-    project: "Compilers"
-  },
-  {
-    name: "Donald Knuth",
-    email: "donald.knuth@musky.com",
-    position: "Mathematician",
-    project: "Algorithm Analysis"
-  }
-]
+//Set skills
+Person.prototype.addSkills = function(skill) {
+  this.skills.push(skill);
+}
 
-// assign each a manager
+//Set manager
+Person.prototype.addManager = function(manager) {
+  this.manager = manager
+}
+
+//Greeting
+Person.prototype.greeting = function() {
+  console.log(`${this.name} is a ${this.position} working on ${this.project}`);
+  console.log(`${this.pronoun} can be reached at ${this.email}`);
+}
+
 let [alan, grace, donald] = new_hires
 
-alan.manager = elon
-grace.manager = elon
-donald.manager = elon
 
-// send to training
-if (!alan.skills) {
-  alan.skills = []
-}
-alan.skills.push("Mathematics")
-
-if (!grace.skills) {
-  grace.skills = []
-}
-grace.skills.push("Cobol")
-
-if (!donald.skills) {
-  donald.skills = []
-}
-donald.skills.push("Computational Complexity")
-
-// whoops!  new person hired later on, do the same again for him
-let new_hire = {
-  name: "Tim Berners-Lee",
-  email: "tim.berners_lee@musky.com",
-  position: "Computer Science",
-  project: "Networks"
-}
 let tim = new_hire
 tim.manager = elon
 
@@ -63,11 +36,20 @@ if (!tim.skills) {
 }
 tim.skills.push("Protocols")
 
-console.log(`${alan.name} is a ${alan.position} working on ${alan.project}.`)
-console.log(`He can be reached at ${alan.email}`)
-console.log(`${grace.name} is a ${grace.position} working on ${grace.project}.`)
-console.log(`She can be reached at ${grace.email}`)
-console.log(`${donald.name} is a ${donald.position} working on ${donald.project}.`)
-console.log(`He can be reached at ${donald.email}`)
-console.log(`${tim.name} is a ${tim.position} working on ${tim.project}.`)
-console.log(`He can be reached at ${tim.email}`)
+//assign Person
+let elon = new Person('Elon Musk', "elon.musk@musky.com", "Boss", "He")
+let alan = new Person('Alan Turing', "alan.turing@musky.com", "Computer Scientist", "Cryptography", "He");
+let grace = new Person('Grace Hopper', "grace.hopper@musky.com", "Computer Scientist", "Compilers", "She");
+let donald = new Person('Donald Knuth', "donald.knuth@musky.com", "Mathematician", "Algorithm Analysis", "He");
+let tim = new Person("Tim Berners-Lee", "tim.berners_lee@musky.com", "Computer Science", "Networks");
+
+//greeting
+elon.greeting()
+alan.greeting()
+grace.greeting()
+donald.greeting()
+
+//addManager
+alan.addManager(elon)
+grace.addManager(elon)
+donald.addManager(elon)
