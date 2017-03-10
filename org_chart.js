@@ -9,10 +9,12 @@ function Person(name, position, project = null, gender = "M") {
 
 Person.prototype.set_manager = function (manager) {
   this.manager = manager
+  return this
 }
 
 Person.prototype.train = function (skill) {
   this.skills.push(skill)
+  return this
 }
 
 Person.prototype.introduce = function () {
@@ -32,9 +34,7 @@ let new_hires = [
 ]
 
 function on_board(employee, manager, course) {
-  employee.set_manager(manager)
-  employee.train(course)
-  employee.introduce()
+  employee.set_manager(manager).train(course).introduce()
 }
 
 let [alan, grace, donald] = new_hires
