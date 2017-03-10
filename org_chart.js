@@ -5,14 +5,22 @@ function Hire(name, position, project, directory, username = name.replace(' ', '
     this.position = position;
     this.project = project;
     this.skills = [];
+
     directory.push(this);
+    if (this.position != 'Boss') {
+        console.log(`${this.name} is a ${this.position} working on ${this.project}`);
+        console.log(`and can be reached at ${this.email}`);
+    }
 }
+
 Hire.prototype.train = function(skill) {
     this.skills.push(skill);
     return this;
 }
+
 Hire.prototype.addManager = function(employee_object) {
     this.manager = employee_object;
+    return this;
 }
 ////////////////////////////////////////////
 
@@ -46,11 +54,5 @@ trainees.forEach(trainee => {
 employees.forEach(employee => {
     if (employee.position != 'Boss') {
         employee.addManager(employees.find(employee => employee.position === 'Boss'))
-    }
-})
-employees.forEach(employee => {
-    if (employee.position != 'Boss') {
-        console.log(`${employee.name} is a ${employee.position} working on ${employee.project}`)
-        console.log(`and can be reached at ${employee.email}`)
     }
 })
