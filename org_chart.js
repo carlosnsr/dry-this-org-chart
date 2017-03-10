@@ -1,73 +1,52 @@
-let elon = {
-  name: "Elon Musk",
-  email: "elon.musk@musky.com",
-  position: "Boss",
+function Persons (name, email, position, project, gender) {
+  this.name = name;
+  this.email = email;
+  this.position = position;
+  this.project = project;
+  this.skills = [];
+  this.gender = gender;
 }
 
-let new_hires = [
-  {
-    name: "Alan Turing",
-    email: "alan.turing@musky.com",
-    position: "Computer Scientist",
-    project: "Cryptography"
-  },
-  {
-    name: "Grace Hopper",
-    email: "grace.hopper@musky.com",
-    position: "Computer Scientist",
-    project: "Compilers"
-  },
-  {
-    name: "Donald Knuth",
-    email: "donald.knuth@musky.com",
-    position: "Mathematician",
-    project: "Algorithm Analysis"
+Persons.prototype.setSkills = function(skill) {
+  if (this.skills.indexOf(skill) > -1) {
+    console.log(this.name, " does not need training.")
+  } else {
+    this.skills.push(skill)
   }
-]
-
-// assign each a manager
-let [alan, grace, donald] = new_hires
-
-alan.manager = elon
-grace.manager = elon
-donald.manager = elon
-
-// send to training
-if (!alan.skills) {
-  alan.skills = []
 }
-alan.skills.push("Mathematics")
 
-if (!grace.skills) {
-  grace.skills = []
+Persons.prototype.setManager = function(manager) {
+  this.manager = manager;
 }
-grace.skills.push("Cobol")
 
-if (!donald.skills) {
-  donald.skills = []
+Persons.prototype.displayAll = function() {
+  var sex;
+  var hisHer;
+  if (this.gender === 'male') {
+    sex = 'He';
+    hisHer = 'His'
+  } else {
+    sex = 'She'
+    hisHer = 'Her'
+  }
+    console.log(`${this.name} is a ${this.position} working on ${this.project}.`)
+    console.log(`${sex} can be reached at ${this.email}`)
+    console.log(`${hisHer} Skills are: ${this.skills}`)
+    console.log(`${hisHer} Manager is ${this.manager}`)
 }
-donald.skills.push("Computational Complexity")
+let tim = new Persons ("Tim Berners-Lee", "tim.berners_lee@musky.com", "Computer Science","Networks", 'male' ); 
+let elon = new Persons ("Elon Musk", "elon.musk@musky.com", "Boss", 'male')
+let alan = new Persons ("Alan Turing", "alan.turing@musky.com", "Computer Scientist", "Cryptography", 'male')
+let grace = new Persons ("Grace Hopper", "grace.hopper@musky.com", "Computer Scientist", "Compilers", 'female')
+let donald  = new Persons ("Donald Knuth", "donald.knuth@musky.com", "Mathematician", "Algorithm Analysis", 'male')
 
-// whoops!  new person hired later on, do the same again for him
-let new_hire = {
-  name: "Tim Berners-Lee",
-  email: "tim.berners_lee@musky.com",
-  position: "Computer Science",
-  project: "Networks"
+Persons.prototype.setAll = function(skill, manager) {
+  this.setSkills(skill)
+  this.setManager(manager) 
+  this.displayAll()
 }
-let tim = new_hire
-tim.manager = elon
 
-if (!tim.skills) {
-  tim.skills = []
-}
-tim.skills.push("Protocols")
-
-console.log(`${alan.name} is a ${alan.position} working on ${alan.project}.`)
-console.log(`He can be reached at ${alan.email}`)
-console.log(`${grace.name} is a ${grace.position} working on ${grace.project}.`)
-console.log(`She can be reached at ${grace.email}`)
-console.log(`${donald.name} is a ${donald.position} working on ${donald.project}.`)
-console.log(`He can be reached at ${donald.email}`)
-console.log(`${tim.name} is a ${tim.position} working on ${tim.project}.`)
-console.log(`He can be reached at ${tim.email}`)
+tim.setAll("Mathematics", "Elon")
+alan.setAll("Cobol", "Elon") 
+grace.setAll("Computational Complexity", "Elon")
+donald.setAll("Protocols", "Elon")
