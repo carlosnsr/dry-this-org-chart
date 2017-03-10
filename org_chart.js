@@ -8,39 +8,45 @@ function Persons (name, email, position, project, gender) {
 }
 
 Persons.prototype.setSkills = function(skill) {
-  for(let i = 0; i < this.skills.length; i++) {
-    if(this.skills[i] != skill) {
-      this.skills.push(skill)
-    }
+  if (this.skills.indexOf(skill) > -1) {
+    console.log(this.name, " does not need training.")
+  } else {
+    this.skills.push(skill)
   }
 }
 
-let tim = new Persons ("Tim Berners-Lee", "tim.berners_lee@musky.com", "Computer Science","Networks" ); 
-let elon = new Persons ("Elon Musk", "elon.musk@musky.com", "Boss")
-let alan = new Persons ("Alan Turing", "alan.turing@musky.com", "Computer Scientist", "Cryptography")
-let grace = new Persons ("Grace Hopper", "grace.hopper@musky.com", "Computer Scientist", "Compilers")
-let donald  = new Persons ("Donald Knuth", "donald.knuth@musky.com", "Mathematician", "Algorithm Analysis")
+Persons.prototype.setManager = function(manager) {
+  this.manager = manager;
+}
 
-tim.setSkills("Mathematics")
-alan.setSkills("Cobol")
-grace.setSkills("Computational Complexity")
-donald.setSkills("Protocols")
+Persons.prototype.displayAll = function() {
+  var sex;
+  var hisHer;
+  if (this.gender === 'male') {
+    sex = 'He';
+    hisHer = 'His'
+  } else {
+    sex = 'She'
+    hisHer = 'Her'
+  }
+    console.log(`${this.name} is a ${this.position} working on ${this.project}.`)
+    console.log(`${sex} can be reached at ${this.email}`)
+    console.log(`${hisHer} Skills are: ${this.skills}`)
+    console.log(`${hisHer} Manager is ${this.manager}`)
+}
+let tim = new Persons ("Tim Berners-Lee", "tim.berners_lee@musky.com", "Computer Science","Networks", 'male' ); 
+let elon = new Persons ("Elon Musk", "elon.musk@musky.com", "Boss", 'male')
+let alan = new Persons ("Alan Turing", "alan.turing@musky.com", "Computer Scientist", "Cryptography", 'male')
+let grace = new Persons ("Grace Hopper", "grace.hopper@musky.com", "Computer Scientist", "Compilers", 'female')
+let donald  = new Persons ("Donald Knuth", "donald.knuth@musky.com", "Mathematician", "Algorithm Analysis", 'male')
 
+Persons.prototype.setAll = function(skill, manager) {
+  this.setSkills(skill)
+  this.setManager(manager) 
+  this.displayAll()
+}
 
-
-// assign each a manager
-alan.manager = elon
-grace.manager = elon
-donald.manager = elon
-tim.manager = elon
-
-console.log(`${alan.name} is a ${alan.position} working on ${alan.project}.`)
-console.log(`His Skills are: ${alan.skills}`)
-console.log(`He can be reached at ${alan.email}`)
-console.log(`His Manager is ${alan.manager}`)
-console.log(`${grace.name} is a ${grace.position} working on ${grace.project}.`)
-console.log(`She can be reached at ${grace.email}`)
-console.log(`${donald.name} is a ${donald.position} working on ${donald.project}.`)
-console.log(`He can be reached at ${donald.email}`)
-console.log(`${tim.name} is a ${tim.position} working on ${tim.project}.`)
-console.log(`He can be reached at ${tim.email}`)
+tim.setAll("Mathematics", "Elon")
+alan.setAll("Cobol", "Elon") 
+grace.setAll("Computational Complexity", "Elon")
+donald.setAll("Protocols", "Elon")
